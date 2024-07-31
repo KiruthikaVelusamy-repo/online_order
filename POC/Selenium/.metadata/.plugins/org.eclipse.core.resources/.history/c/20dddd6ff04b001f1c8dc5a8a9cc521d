@@ -1,0 +1,17 @@
+package amazon.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+
+import amazon.AbstractComponents.AbstractComponents;
+
+public class OrderSummary extends AbstractComponents {
+
+	WebDriver driver;
+
+	public OrderSummary(WebDriver driver) {
+		super(driver);
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+}

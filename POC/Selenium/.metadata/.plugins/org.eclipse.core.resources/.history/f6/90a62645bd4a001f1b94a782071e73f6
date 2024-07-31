@@ -1,0 +1,5 @@
+package amazonseleniumframework.pageobjects;
+
+public class ProductCatalog {
+
+}

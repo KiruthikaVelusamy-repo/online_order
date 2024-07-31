@@ -1,0 +1,40 @@
+package amazon.AbstractComponents;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class AbstractComponents {
+
+	WebDriver driver;
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+
+	public AbstractComponents(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	public void scrollBy(int x, int y) {
+
+		//js.executeScript("window.scrollBy({x},{y})");
+		js.executeScript("window.scrollBy(arguments[0],arguments[1]);",x,y);
+
+	}
+	
+	public void scrollBy(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void scrollToElementAndClick(WebElement element) {
+
+		js.executeScript("arguments[0].click();", element);
+	}
+
+	public void scrollToElement(WebElement element) {
+
+		js.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+
+}

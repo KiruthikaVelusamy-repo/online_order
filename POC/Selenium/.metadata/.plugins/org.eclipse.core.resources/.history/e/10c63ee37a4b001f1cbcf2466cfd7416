@@ -1,0 +1,18 @@
+package Amazon.tests;
+
+import java.io.IOException;
+
+import org.testng.annotations.Test;
+
+import Amazon.TestComponents.BaseTest;
+import amazon.pageobjects.ProductCatalog;
+
+public class ErrorValidations extends BaseTest{
+
+	@Test
+	public void placeOrder() throws IOException
+	{
+		
+		landingPage.signIn("Kiruthikavelusamy", "Test@123");
+	}
+}

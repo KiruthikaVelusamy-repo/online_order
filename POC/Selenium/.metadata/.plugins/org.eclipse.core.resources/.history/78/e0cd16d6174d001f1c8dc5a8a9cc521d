@@ -1,0 +1,39 @@
+package Amazon.tests;
+
+import java.io.IOException;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import Amazon.TestComponents.BaseTest;
+import amazon.pageobjects.AddToCart;
+import amazon.pageobjects.OrderSummary;
+import amazon.pageobjects.ProductCatalog;
+import amazon.pageobjects.ProductCheckOut;
+import amazon.pageobjects.ProductView;
+
+public class StandAloneTest extends BaseTest {
+
+	ProductCheckOut productCheckOut;
+	@Test
+	public void addItemToCart() throws IOException {
+		String bookName = "Test Automation using Selenium WebDriver with Java";
+		ProductCatalog productCatalog = landingPage.signIn("Kiruthikavelusamy.in@gmail.com", "Test@123");
+		ProductView productView = productCatalog.selectProduct();
+		AddToCart addToCart = productView.getProductByName(bookName);
+		productCheckOut = addToCart.addItemToBasket();
+		String itemAddedMessage = addToCart.verifyItemAddedMessage();
+		Assert.assertEquals(itemAddedMessage, "Added to Basket");
+		
+	}
+
+	@Test(enabled = false)
+	public void placeOrder()
+	{
+        landingPage.signIn("Kiruthikavelusamy.in@gmail.com", "Test@123");
+		OrderSummary orderSummary = productCheckOut.checkOut();
+		String[] deliveryDate = orderSummary.orderDetails();
+		System.out.println("Delivery Date : " + deliveryDate[0] + " " + deliveryDate[1] + " " + deliveryDate[2]);
+	}
+
+}

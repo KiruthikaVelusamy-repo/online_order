@@ -1,0 +1,12 @@
+package amazonseleniumframework.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+
+public class ProductCatalog {
+
+	WebDriver driver;
+	public ProductCatalog(WebDriver driver)
+	{
+		this.driver=driver;
+	}
+}

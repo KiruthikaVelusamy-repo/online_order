@@ -1,0 +1,21 @@
+package Amazon.tests;
+
+import java.io.IOException;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import Amazon.TestComponents.BaseTest;
+import amazon.pageobjects.ProductCatalog;
+
+public class ErrorValidations extends BaseTest{
+
+	@Test
+	public void placeOrder() throws IOException
+	{
+		
+		landingPage.signIn("Kiruthikavelusamy", "Test@123");
+		String errorMessage = landingPage.getErrorMessage();
+		Assert.assertEquals(errorMessage, "Wrong or Invalid e-mail address or mobile phone number. Please correct and try again");
+	}
+}

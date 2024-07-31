@@ -1,0 +1,9 @@
+package amazon.resources;
+
+public class ExtentReporterNG {
+
+	public void extentReportGenerator()
+	{
+		
+	}
+}

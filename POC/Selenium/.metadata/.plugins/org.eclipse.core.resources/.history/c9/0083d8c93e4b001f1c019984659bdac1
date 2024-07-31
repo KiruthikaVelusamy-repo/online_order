@@ -1,0 +1,108 @@
+package amazon.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import amazon.AbstractComponents.AbstractComponents;
+
+public class ProductCatalog extends AbstractComponents {
+
+	WebDriver driver;
+
+	public ProductCatalog(WebDriver driver) {
+		super(driver);
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+
+	// WebElement mainMenu= driver.findElement(By.id("nav-hamburger-menu"));
+	@FindBy(id = "nav-hamburger-menu")
+	WebElement mainMenu;
+
+	// WebElement scrollToBook = driver.findElement(By.xpath("//div[text()='shop by
+	// department']"));
+	@FindBy(xpath = "//div[text()='shop by department']")
+	WebElement scrollToBook;
+
+	// WebElement menuItem =
+	// driver.findElement(By.xpath("//a[@class='hmenu-item']/div[text()='Books']"))
+	@FindBy(xpath = "//a[@class='hmenu-item']/div[text()='Books']")
+	WebElement menuItem;
+
+	// WebElement bookMenu =
+	// driver.findElement(By.xpath("//div[@id='hmenu-content']/ul/li/a[text()='Books']"));
+	@FindBy(xpath = "//div[@id='hmenu-content']/ul/li/a[text()='Books']")
+	WebElement bookMenu;
+
+	// WebElement searchText = driver.findElement(By.id("twotabsearchtextbox"));
+	@FindBy(id = "twotabsearchtextbox")
+	WebElement searchText;
+
+	// WebElement searchSubmit =
+	// driver.findElement(By.id("nav-search-submit-button"));
+	@FindBy(id = "nav-search-submit-button")
+	WebElement searchSubmit;
+
+	// List<WebElement> listOfBooks =
+	// driver.findElements(By.xpath("//div[@data-cy='title-recipe']/h2/a/span"));
+	@FindBy(xpath = "//div[@data-cy='title-recipe']/h2/a/span")
+	List<WebElement> listOfBooks;
+
+	By listOfBooksBy = By.xpath("//div[@data-cy='title-recipe']/h2/a/span");
+
+	// WebElement quantityDropdown = driver.findElement(By.id("quantity"));
+	@FindBy(id = "quantity")
+	WebElement quantityDropdown;
+
+	// WebElement noOfQuantity =
+	// driver.findElement(By.xpath(".//*[@id='quantity_1']"));
+	@FindBy(xpath = ".//*[@id='quantity_1']")
+	WebElement noOfQuantity;
+
+	// WebElement addToCart=driver.findElement(By.id("add-to-cart-button"));
+	@FindBy(id = "add-to-cart-button")
+	WebElement addToCart;
+
+	// WebElement msgSuccess =
+	// driver.findElement(By.cssSelector("div[id*='MSG_SUCCESS'] h1"));
+	@FindBy(css = "div[id*='MSG_SUCCESS'] h1")
+	WebElement msgSuccess;
+
+	public void productSearch(String bookName) {
+		// TODO Auto-generated method stub
+		mainMenu.click();
+		scrollToElement(scrollToBook);
+		menuItem.click();
+		scrollToElementAndClick(bookMenu);
+		searchText.sendKeys(bookName);
+		searchSubmit.click();
+
+	}
+
+	public List<WebElement> getProductList() {
+		waitForElementToAppear(listOfBooksBy);
+		return listOfBooks;
+	}
+
+	public String getProductByName(String bookName) {
+		/*
+		 * for (WebElement b : listOfBooks) { if
+		 * (b.getText().equalsIgnoreCase(bookName)) { b.click(); break; } }
+		 */
+		WebElement Srchbook = getProductList().stream().filter(b -> b.getText().equals(bookName)).findFirst().orElse(null);
+		Srchbook.click();
+		scrollBy(0, 500);
+		scrollToElementAndClick(quantityDropdown);
+		scrollToElementAndClick(noOfQuantity);
+		addToCart.click();
+		String itemAddedMessage = msgSuccess.getText();
+		return itemAddedMessage;
+
+	}
+
+}

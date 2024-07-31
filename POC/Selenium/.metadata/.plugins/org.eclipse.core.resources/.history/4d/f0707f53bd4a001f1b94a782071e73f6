@@ -1,0 +1,10 @@
+package amazonseleniumframework.pageobjects;
+
+public class ProductCatalog {
+
+	WebDriver driver;
+	public ProductCatalog(WebDriver driver)
+	{
+		this.driver=driver;
+	}
+}

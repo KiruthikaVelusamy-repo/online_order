@@ -1,0 +1,28 @@
+package amazon.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import amazon.AbstractComponents.AbstractComponents;
+
+public class ProductCatalog {
+
+	WebDriver driver;
+	public ProductCatalog(WebDriver driver)
+	{
+		this.driver=driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	//WebElement menuClick= driver.findElement(By.id("nav-hamburger-menu"));
+	@FindBy(id="nav-hamburger-menu")
+	WebElement menuClick;
+	
+	
+	public void productSearch() {
+		// TODO Auto-generated method stub
+		menuClick.click();
+	}
+}

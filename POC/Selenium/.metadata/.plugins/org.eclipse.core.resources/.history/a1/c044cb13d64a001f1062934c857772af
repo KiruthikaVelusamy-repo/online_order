@@ -1,0 +1,54 @@
+package amazon.pageobjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import amazon.AbstractComponents.AbstractComponents;
+
+public class ProductCheckOut extends AbstractComponents {
+
+		WebDriver driver;
+
+		public ProductCheckOut(WebDriver driver) {
+			super(driver);
+			this.driver = driver;
+			PageFactory.initElements(driver, this);
+		}
+		
+
+		// WebElement checkOut= driver.findElement(By.name("proceedToRetailCheckout"));
+		@FindBy(name = "proceedToRetailCheckout")
+		WebElement checkOut;
+		
+		// WebElement shippingAddress= driver.findElement(By.xpath("//input[@data-testid='Address_selectShipToThisAddress']"));
+		@FindBy(xpath = "//input[@data-testid='Address_selectShipToThisAddress']")
+		WebElement shippingAddress;
+		
+		// WebElement setPaymentPlan= driver.findElement(By.cssSelector("input[name*='SetPaymentPlanSelectContinueEvent']"));
+		@FindBy(css = "input[name*='SetPaymentPlanSelectContinueEvent']")
+		WebElement setPaymentPlan;
+		
+		// WebElement itemsAndDelivery= driver.findElement(By.xpath("//*[contains(.,'Items and delivery')]"));
+		@FindBy(xpath= "//*[contains(.,'Items and delivery')]")
+		WebElement itemsAndDelivery;
+				
+		public void checkOut()
+		{
+		checkOut.click();
+		shippingAddress.click();
+		setPaymentPlan.click();
+		scrollToElement(itemsAndDelivery);
+		String date = driver.findElement(By.xpath("//span[@data-field='promiseday']")).getText();
+		String month = driver.findElement(By.xpath("//span[@data-field='promisemonth']")).getText();
+		String year = driver.findElement(By.xpath("//span[@data-field='promiseyear']")).getText();
+		WebElement orderedItem = driver
+				.findElement(By.xpath("//img[@alt='" + bookName + "']/parent::div/following-sibling::div[1]"));
+		System.out.println("Product : " + orderedItem.getText());
+
+		System.out.println("Delivery Date : " + date + " " + month + " " + year);
+		}
+		
+		
+}

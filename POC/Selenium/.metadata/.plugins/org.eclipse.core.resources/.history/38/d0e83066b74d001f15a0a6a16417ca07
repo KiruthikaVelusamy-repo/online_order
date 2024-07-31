@@ -1,0 +1,46 @@
+package Amazon.TestComponents;
+
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+import amazon.resources.ExtentReporterNG;
+
+public class Listeners implements ITestListener {
+	
+	ExtentReports extent = ExtentReporterNG.getReportObject();
+	ExtentTest test;
+	
+	@Override  
+	public void onTestStart(ITestResult result) {  
+	// TODO Auto-generated method stub  
+		test  = extent.createTest(result.getMethod().getMethodName());
+	}  
+	  
+	@Override  
+	public void onTestSuccess(ITestResult result) {  
+	// TODO Auto-generated method stub  
+	test.log(Status.PASS,"Test PASS");
+	}  
+	  
+	@Override  
+	public void onTestFailure(ITestResult result) {  
+	// TODO Auto-generated method stub  
+		test.fail(result.getThrowable()); // to print the error message
+		test.log(Status.FAIL,"Test Fail");
+		
+		//take screenshot , attach to report
+	}  
+	  
+	@Override  
+	public void onTestSkipped(ITestResult result) {  
+	// TODO Auto-generated method stub  
+	System.out.println("Skip of test cases and its details are : "+result.getName());  
+	}  
+	  
+	 
+	  
+}

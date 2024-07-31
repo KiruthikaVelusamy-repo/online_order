@@ -1,0 +1,17 @@
+package amazon.resources;
+
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
+public class ExtentReporterNG {
+
+	public void extentReportGenerator()
+	{ 
+		String path="C:\\Users\\kivelusa\\OneDrive - Capgemini\\POC\\Selenium\\SeleniumFramework\\reports\\index.html";
+		ExtentSparkReporter reporter = new ExtentSparkReporter(path);
+		reporter.config().setDocumentTitle("Test Results");
+		reporter.config().setReportName("Web automation Results");
+		
+		
+		
+	}
+}
